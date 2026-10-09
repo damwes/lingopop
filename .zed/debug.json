@@ -12,5 +12,6 @@
       "args": ["run"],
     },
     "program": "$ZED_WORKTREE_ROOT/.build/debug/LingoPop",
+    "cwd": "${ZED_WORKTREE_ROOT}",
   },
 ]
