@@ -12,8 +12,8 @@ let package = Package(
         .executableTarget(
             name: "LingoPop",
             swiftSettings: [
-                .enableUpcomingFeature("ApproachableConcurrency"),
+                .enableUpcomingFeature("ApproachableConcurrency")
             ],
-        ),
+        )
     ]
 )

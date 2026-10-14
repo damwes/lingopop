@@ -7,12 +7,12 @@ struct LingoPop: App {
         case auto, english, portuguese
         var id: Self { self }
     }
-    
+
     @State private var selectedInputLanguage: LingoLanguage = .auto
     @State private var selectedOutputLanguage: LingoLanguage = .portuguese
-    
+
     var body: some Scene {
-        MenuBarExtra("Lingo Settings", systemImage: "bubble.middle.top") {
+        MenuBarExtra("LingoPop", systemImage: "bubble.middle.top") {
             Picker("Input Language", selection: $selectedInputLanguage) {
                 Text("Auto").tag(LingoLanguage.auto)
                 Text("English").tag(LingoLanguage.english)
