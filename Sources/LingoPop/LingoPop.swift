@@ -1,33 +1,30 @@
+import HotKey
 import SwiftUI
 
 @main
 struct LingoPop: App {
 
-    enum LingoLanguage: String, CaseIterable, Identifiable {
-        case auto, english, portuguese
-        var id: Self { self }
-    }
+    @Environment(\.openWindow) private var openWindow
 
-    @State private var selectedInputLanguage: LingoLanguage = .auto
-    @State private var selectedOutputLanguage: LingoLanguage = .portuguese
+    @State private var appState = AppState()
 
     var body: some Scene {
+        Window("Popover", id: "lingo-popover") {
+            ContentView()
+        }
+        .windowResizability(.contentSize)
+        .windowStyle(.hiddenTitleBar)
+        .windowLevel(.floating)
+        .defaultLaunchBehavior(.suppressed)
+
         MenuBarExtra("LingoPop", systemImage: "bubble.middle.top") {
-            Picker("Input Language", selection: $selectedInputLanguage) {
-                Text("Auto").tag(LingoLanguage.auto)
-                Text("English").tag(LingoLanguage.english)
-                Text("Portuguese").tag(LingoLanguage.portuguese)
-            }
-
-            Picker("Output Language", selection: $selectedOutputLanguage) {
-                Text("Portuguese").tag(LingoLanguage.portuguese)
-                Text("English").tag(LingoLanguage.english)
-            }
-
-            Divider()
-
-            Button("Exit") { NSApplication.shared.terminate(nil) }
-                .keyboardShortcut("X")
+            MenuBarView()
+                .environment(appState)
+                .task {
+                    appState.hotkey.keyDownHandler = {
+                        openWindow(id: "lingo-popover")
+                    }
+                }
         }
     }
 }
